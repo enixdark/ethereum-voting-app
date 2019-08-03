@@ -1,0 +1,8 @@
+vendor
+decentralized-crowd-funding/node_modules
+storage/*
+remix
+remix-ide
+steganography
+eth-faucet
+eth-explorer/node_modules
