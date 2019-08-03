@@ -69,7 +69,7 @@
                                         </p>
 
                                     </div>
-                                    <div class="social_shared ">
+                                    <!-- <div class="social_shared ">
                                         <a target="_blank" class="fa fa-facebook"
                                             href="http://www.facebook.com/sharer/sharer.php?u={{ object.getLink() }}"></a>
                                         <a target="_blank" class="fa fa-google"
@@ -77,7 +77,7 @@
                                         <a target="_blank" class="fa fa-twitter"
                                             href="https://twitter.com/intent/tweet?text={{ object.name }}&url={{ object.getLink() }}&via=TWITTER-HANDLER">
                                         </a>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                             <div style="color: #449d44;font-size: 20px;" id="msg_big_success"></div>
@@ -132,7 +132,7 @@
                         </div>
                         <div id="menu1" class="tab-pane fade">
                             <h3>OUR DOCUMENTS</h3>
-                            <table class="table box_document">
+                            <!-- <table class="table box_document">
                                 <tr>
                                     <td><img class="nd_donations_float_left" alt="" width="25"
                                             src="http://www.nicdarkthemes.com/themes/charity/wp/demo/charity-foundation/wp-content/uploads/sites/3/2017/04/icon-pdf.png">
@@ -157,7 +157,7 @@
                                         <a class="btn_view_more">PREVIEW</a>
                                     </td>
                                 </tr>
-                            </table>
+                            </table> -->
                         </div>
                         <div id="menu2" class="tab-pane fade">
                             <h3>Donations</h3>

@@ -17,29 +17,41 @@
                                 </div>
 
 
-                                <div class="product__quantity product__view__quantity content-detail-block" style="margin-bottom: 10px">
+                                <div class="product__quantity product__view__quantity content-detail-block"
+                                    style="margin-bottom: 10px">
                                     <div class="product__price product__price__regular">
-                                        <p class="mb-0" style="display:inline-block; margin-right: 10px; color: #515151">
-                                            <b>Token name: <span id="price_bid">{{ object.token_name }} </span> ({{ object.symbol }}) </b>
+                                        <p class="mb-0"
+                                            style="display:inline-block; margin-right: 10px; color: #515151">
+                                            <b>Token name: <span id="price_bid">{{ object.token_name }} </span>
+                                                ({{ object.symbol }}) </b>
                                         </p>
                                         <br>
 
-                                        <p class="mb-0" style="display:inline-block; margin-right: 10px; color: #515151">
-                                            <b>Total Supply: <span id="total_supply">{{ number_format(object.total_supply) }} </span> ({{ object.symbol }}) </b>
+                                        <p class="mb-0"
+                                            style="display:inline-block; margin-right: 10px; color: #515151">
+                                            <b>Total Supply: <span
+                                                    id="total_supply">{{ number_format(object.total_supply) }} </span>
+                                                ({{ object.symbol }}) </b>
                                         </p>
 
-                                        <p class="mb-0" style="display:inline-block; margin-right: 10px; color: #515151">
+                                        <p class="mb-0"
+                                            style="display:inline-block; margin-right: 10px; color: #515151">
                                             <b>Token Address:
-                                                <a href="https://ropsten.etherscan.io/address/{{ object.contribute_address }}" target="_blank">{{ object.contribute_address }}</a>
-                                                <input type="hidden" id="contribute_address" value="{{ object.contribute_address }}">
+                                                <a href="https://ropsten.etherscan.io/address/{{ object.contribute_address }}"
+                                                    target="_blank">{{ object.contribute_address }}</a>
+                                                <input type="hidden" id="contribute_address"
+                                                    value="{{ object.contribute_address }}">
                                             </b>
                                         </p>
 
                                     </div>
                                     <div class="social_shared ">
-                                        <a target="_blank" class="fa fa-facebook" href="http://www.facebook.com/sharer/sharer.php?u={{ object.getLink() }}"></a>
-                                        <a target="_blank" class="fa fa-google" href="https://plus.google.com/share?url={{ object.getLink() }}"></a>
-                                        <a target="_blank" class="fa fa-twitter" href="https://twitter.com/intent/tweet?text={{ object.name }}&url={{ object.getLink() }}&via=TWITTER-HANDLER">
+                                        <a target="_blank" class="fa fa-facebook"
+                                            href="http://www.facebook.com/sharer/sharer.php?u={{ object.getLink() }}"></a>
+                                        <a target="_blank" class="fa fa-google"
+                                            href="https://plus.google.com/share?url={{ object.getLink() }}"></a>
+                                        <a target="_blank" class="fa fa-twitter"
+                                            href="https://twitter.com/intent/tweet?text={{ object.name }}&url={{ object.getLink() }}&via=TWITTER-HANDLER">
                                         </a>
                                     </div>
                                 </div>
@@ -50,19 +62,22 @@
 
                             <div class="name-info-conten">
                                 <div class="input-group" style="width: 200px;">
-                                    <span class="input-group-addon">ETH</span><input type="text" name="price_bid_user" id="price_bid_user" class="form-control input-number" value="0">
+                                    <span class="input-group-addon">ETH</span><input type="text" name="price_bid_user"
+                                        id="price_bid_user" class="form-control input-number" value="0">
                                 </div>
                             </div>
 
                             <input type="hidden" name="current_user_id" id="current_user_id" value="1">
                             <div class="product__bid">
                                 {% if object.contribute_end_time > time() %}
-                                    <a id="bid_now" type="button" class="btn btn-newcater" style="width: 50%;"><span class="glyphicon glyphicon-hand-right"></span> Bid now</a>
+                                <a id="bid_now" type="button" class="btn btn-newcater" style="width: 50%;"><span
+                                        class="glyphicon glyphicon-hand-right"></span> Bid now</a>
                                 {% endif %}
                             </div>
 
                             <p> 5% Service costs</p>
-                            <p style="font-size: 18px;">Current Warriors: <span id="bid_currently">{{ object.current_warrior }}</span></p>
+                            <p style="font-size: 18px;">Current Warriors: <span
+                                    id="bid_currently">{{ object.current_warrior }}</span></p>
                         </div>
                     </div>
                 </div>
@@ -77,9 +92,11 @@
 
                     <ul class="nav nav-tabs">
                         <li class="active"><a data-toggle="tab" href="#home"><b>Description</b></a></li>
-                        <li><a data-toggle="tab" href="#menu1"><b class="hidden-sm-down">Documents</b> <i class="fa fa-file hidden-sm-up"></i></a></li>
+                        <li><a data-toggle="tab" href="#menu1"><b class="hidden-sm-down">Documents</b> <i
+                                    class="fa fa-file hidden-sm-up"></i></a></li>
                         <li><a data-toggle="tab" href="#menu2"><b>Donations</b></a></li>
-                        <li><a data-toggle="tab" href="#menu3"><b class="hidden-sm-down">Comments</b> <i class="fa fa-comments hidden-sm-up"></i></a></li>
+                        <li><a data-toggle="tab" href="#menu3"><b class="hidden-sm-down">Comments</b> <i
+                                    class="fa fa-comments hidden-sm-up"></i></a></li>
                     </ul>
 
                     <div class="tab-content">
@@ -91,7 +108,7 @@
                         </div>
                         <div id="menu1" class="tab-pane fade">
                             <h3>OUR DOCUMENTS</h3>
-                            <table class="table box_document">
+                            <!-- <table class="table box_document">
                                 <tr>
                                     <td><img class="nd_donations_float_left" alt="" width="25" src="http://www.nicdarkthemes.com/themes/charity/wp/demo/charity-foundation/wp-content/uploads/sites/3/2017/04/icon-pdf.png"> PDF</td>
                                     <td>
@@ -112,36 +129,36 @@
                                         <a class="btn_view_more">PREVIEW</a>
                                     </td>
                                 </tr>
-                            </table>
+                            </table> -->
                         </div>
                         <div id="menu2" class="tab-pane fade">
                             <h3>Donations</h3>
                             <table class="table box_document">
                                 {% for item in list_contribute %}
-                                    <tr>
-                                        <td>
-                                            <b>
-                                                <a href="https://ropsten.etherscan.io/address/{{ item['contribute_address'] }}" target="_blank">{{ item['contribute_address'] }}</a>
-                                            </b>
-                                        </td>
-                                        <td class="text-right">
-                                            {{ number_format(item['sumatory'], 2) }} ETH
-                                        </td>
-                                    </tr>
+                                <tr>
+                                    <td>
+                                        <b>
+                                            <a href="https://ropsten.etherscan.io/address/{{ item['contribute_address'] }}"
+                                                target="_blank">{{ item['contribute_address'] }}</a>
+                                        </b>
+                                    </td>
+                                    <td class="text-right">
+                                        {{ number_format(item['sumatory'], 2) }} ETH
+                                    </td>
+                                </tr>
                                 {% endfor %}
 
                             </table>
                         </div>
                         <div id="menu3" class="tab-pane fade">
                             <h3>Post comment</h3>
-                            <div class="fb-comments" data-href="{{ object.getLink() }}" data-numposts="5" data-width="100%"></div>
+                            <div class="fb-comments" data-href="{{ object.getLink() }}" data-numposts="5"
+                                data-width="100%"></div>
                         </div>
                     </div>
                 </div>
 
-                <input type="hidden" class="project_info"
-                       data-id="{{ object.id }}"
-                >
+                <input type="hidden" class="project_info" data-id="{{ object.id }}">
             </div>
         </div>
     </div>
@@ -151,12 +168,20 @@
         padding: 28px 28px 0;
     }
 
-    .flag-body, .flag-img {
+    .flag-body,
+    .flag-img {
         display: table-cell;
         padding-right: 10px;
     }
 
-    .content-information, .count-box .thumbnail-inner, .etsy-icon, .fa-money, .fa-stack, .flag-body, .flag-img, .stars-svg {
+    .content-information,
+    .count-box .thumbnail-inner,
+    .etsy-icon,
+    .fa-money,
+    .fa-stack,
+    .flag-body,
+    .flag-img,
+    .stars-svg {
         vertical-align: middle;
     }
 

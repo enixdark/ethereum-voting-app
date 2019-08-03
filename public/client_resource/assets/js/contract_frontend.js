@@ -196,7 +196,6 @@ App = {
     getAccount: function () {
 
         web3.eth.getAccounts(function (error, accounts) {
-            debugger
             if (error) {
                 console.log(error);
             }
@@ -436,7 +435,6 @@ App = {
     },
 
     get_current_warrior: function () {
-        debugger
         let contribute_addresss = $('#contribute_address').val();
         if (contribute_addresss) {
 
@@ -446,7 +444,6 @@ App = {
             let id = project_info.attr('data-id');
 
             async function get_project_info() {
-                debugger
                 let current_warrior = await bidContract.bidCount().then(function (total_warrior) {
                     total_warrior = web3.toDecimal(total_warrior);
                     $('#bid_currently').html(total_warrior);
@@ -507,14 +504,13 @@ App = {
             }
 
             let send_account = accounts[0];
-            debugger
             web3.eth.sendTransaction({
                 to: _toAddress,
                 from: send_account,
                 value: web3.toWei(_value, "ether"),
-                gas:300000
+                gas: 300000
             }, function (err, hash) {
-                if(err) {
+                if (err) {
                     console.log(err);
                     return false;
                 }
@@ -551,23 +547,32 @@ App = {
         total_supply = total_supply * 1e18;
         let decimal = 18;
         let link = $('.file_url').val();
+        web3.eth.getAccounts(function (error, accounts) {
+            if (error) {
+                console.log(error);
+            }
+            web3.eth.defaultAccount = accounts[0];
+            App.contracts.DCCollectible.new(token_name, symbol, decimal, total_supply, link, {
+                from: web3.eth.defaultAccount,
+                gas: 5000000
+            }).then(function (instance) {
+                let address = instance.address;
+                let hash = instance.transactionHash;
 
-        App.contracts.DCCollectible.new(token_name, symbol, decimal, total_supply, link).then(function (instance) {
-            let address = instance.address;
-            let hash = instance.transactionHash;
+                let data_serialize = $('#token_form').serializeArray();
+                $.toast({
+                    heading: 'Success',
+                    text: "Success!",
+                    icon: 'info',
+                    loader: true,
+                    position: 'top-right',
+                });
 
-            let data_serialize = $('#token_form').serializeArray();
-            $.toast({
-                heading: 'Success',
-                text: "Success!",
-                icon: 'info',
-                loader: true,
-                position: 'top-right',
+            }).catch(function (err) {
+                console.log(err);
+                //	debugger;
+                // There was an error! Handle it.
             });
-
-        }).catch(function (err) {
-            //	debugger;
-            // There was an error! Handle it.
         });
     }
 

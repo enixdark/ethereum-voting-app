@@ -232,7 +232,7 @@
         </div>
     </section>
 
-    <section class="sec-our-causes bg_ef">
+    <!-- <section class="sec-our-causes bg_ef">
 
         <div class="container">
             <h3 class="title">Campaigns
@@ -263,7 +263,7 @@
                 {% endfor %}
             </div>
         </div>
-    </section>
+    </section> -->
 
     <section class="sec-our-causes">
 

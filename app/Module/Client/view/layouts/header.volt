@@ -35,35 +35,6 @@
             <div class="collapse navbar-collapse w-100" id="navbarsExample07">
                 <div id="bs-example-navbar-collapse-1" class="collapse navbar-collapse">
                     <ul id="menu-main-menu" class="nav navbar-nav">
-                        <li class="menu-item  dropdown">
-                            <a title="About" href="#" lass="dropdown-toggle">About <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a title="About Us" href="#">About Us</a></li>
-                                <li><a title="Manifesto" href="#">Manifesto</a></li>
-                                <li><a title="Team" href="#">Team</a></li>
-                                <li><a title="Partners" href="#">Partners</a></li>
-                            </ul>
-                        </li>
-                        <li class="menu-item dropdown"><a title="Investments" href="#" class="dropdown-toggle">Our work
-                                <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a title="Our Approach" href="#">Our work</a></li>
-                                <li><a title="Companies" href="#">Companies</a></li>
-                                <li><a title="Regions" href="#">Regions</a></li>
-                                <li><a title="Sectors" href="#">Sectors</a></li>
-                                <li><a title="Lean Data" href="#">Lean Data</a></li>
-                            </ul>
-                        </li>
-                        <li class="menu-item dropdown"><a title="Investments" href="#" class="dropdown-toggle">Help US
-                                <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a title="Our Approach" href="#">Our Approach</a></li>
-                                <li><a title="Companies" href="#">Companies</a></li>
-                                <li><a title="Regions" href="#">Regions</a></li>
-                                <li><a title="Sectors" href="#">Sectors</a></li>
-                                <li><a title="Lean Data" href="#">Lean Data</a></li>
-                            </ul>
-                        </li>
                         <li class="menu-item dropdown"><a title="Investments" href="/faq" class="dropdown-toggle">FAQs
                             </a></li>
                         {% if user_info is empty %}

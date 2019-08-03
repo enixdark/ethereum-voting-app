@@ -21,7 +21,6 @@ App = {
         $.getJSON('/client_resource/assets/contracts/DecentralizedCrowdFunding2.json?v=' + current_time, function (data) {
             //$.getJSON('//decentralized-crowd-funding/build/DecentralizedCrowdFunding.json', function(data) {
             // Get the necessary contract artifact file and instantiate it with truffle-contract
-            debugger
             let DCFundingArtifact = data;
             App.contracts.DCFunding = TruffleContract(DCFundingArtifact);
 
@@ -57,7 +56,6 @@ App = {
     },
 
     acceptProject: function (event) {
-        debugger
         let project_status = $('#project_status').attr('data-status') || '0';
         let status_diplay = $('#status_display').val() || '1';
         if (status_diplay === '2' && project_status === '0') {
@@ -78,8 +76,10 @@ App = {
                 }
                 web3.eth.defaultAccount = accounts[0];
 
-                App.contracts.DCFunding.new({from: web3.eth.defaultAccount,gas: 5000000}).then(function (instance) {
-                    debugger
+                App.contracts.DCFunding.new({
+                    from: web3.eth.defaultAccount,
+                    gas: 5000000
+                }).then(function (instance) {
                     let address = instance.address;
                     let hash = instance.transactionHash;
                     $.ajax({
@@ -104,7 +104,6 @@ App = {
                         }, 2000);
                     });
                 }).catch(function (err) {
-                    debugger;
                     console.log(err);
                     // There was an error! Handle it.
                 });
@@ -236,8 +235,11 @@ App = {
                     console.log(error);
                     return;
                 }
-                web3.eth.defaultAccount = accounts[1];
-                App.contracts.DCBidding.new({from: web3.eth.defaultAccount,gas: 5000000}).then(function (instance) {
+                web3.eth.defaultAccount = accounts[0];
+                App.contracts.DCBidding.new({
+                    from: web3.eth.defaultAccount,
+                    gas: 5000000
+                }).then(function (instance) {
                     let address = instance.address;
                     let hash = instance.transactionHash;
                     $.ajax({
@@ -262,7 +264,7 @@ App = {
                         }, 2000);
                     });
                 }).catch(function (err) {
-                    debugger;
+                    console.log(err);
                     // There was an error! Handle it.
                 });
             });
