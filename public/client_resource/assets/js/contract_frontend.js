@@ -120,7 +120,6 @@ App = {
         let project_id = project_info.attr('data-id');
 
         web3.eth.getAccounts(function (error, accounts) {
-            debugger
             if (error) {
                 console.log(error);
             }
@@ -133,7 +132,6 @@ App = {
                 value: web3.toWei(_value, "ether"),
                 gas: 300000
             }, function (err, hash) {
-                debugger
                 if (err) {
                     console.log(err);
                 }
@@ -142,9 +140,7 @@ App = {
                 }
 
                 App.contracts.DCFunding.at($('#contribute_address').val()).then(function (instance) {
-                    debugger
                     instance.totalRaised().then(function (raised) {
-                        debugger
                         let _raised = web3.fromWei(raised, 'ether');
                         _raised = web3.toDecimal(_raised);
                         instance.currentBalance().then(function (balance) {
@@ -428,19 +424,22 @@ App = {
             }
             web3.eth.defaultAccount = accounts[0];
             let fundContract = App.contracts.DCFunding.at($('#project_address').val()).then(function (instance) {
-                debugger
                 let project_id = $('#project_id').val();
                 let caption = $('#caption').val();
 
                 let mul = Math.pow(10, 18);
                 let request_amount = amount * mul;
-                instance.requestDisbursement(request_amount).then(function (res1) {
-                    debugger
+                instance.requestDisbursement(request_amount, {
+                    from: web3.eth.accounts[0],
+                    gas: 3000000
+                }).then(function (res1) {
 
                     let result_request_hash = res1.tx;
-                    instance.setDisbursementEndTime(end_time).then(function (res2) {
+                    instance.setDisbursementEndTime(end_time, {
+                        from: web3.eth.accounts[0],
+                        gas: 3000000
+                    }).then(function (res2) {
                         let result_time_hash = res2.tx;
-                        debugger
                         $.ajax({
                             method: "POST",
                             url: "/api/create_withdraw",
@@ -453,7 +452,6 @@ App = {
                                 caption: caption
                             }
                         }).done(function (data) {
-                            debugger
                             if (data.status === 2) {
                                 return $.toast({
                                     heading: 'Success',
@@ -472,7 +470,6 @@ App = {
                                 position: 'top-right',
                             });
                         }).catch(function (err) {
-                            debugger
                             console.log(err);
                         });
                     }).catch(function (err) {

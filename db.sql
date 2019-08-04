@@ -1,18 +1,18 @@
 CREATE TABLE
 IF NOT EXISTS article
 (
-    id int AUTO_INCREMENT,
-    name varchar,
+    id int AUTO_INCREMENT primary key,
+    name varchar(255),
     category_id int,
-    avatar varchar,
-    description varchar,
-    status varchar,
-    content varchar,
+    avatar varchar(255),
+    description varchar(255),
+    status varchar(255),
+    content varchar(255),
     datecreate int,
-    seo_title varchar,
-    seo_description varchar,
-    seo_keyword varchar,
-    type varchar
+    seo_title varchar(255),
+    seo_description varchar(255),
+    seo_keyword varchar(255),
+    type varchar(255)
 ) ENGINE=INNODB;
 
 CREATE TABLE
@@ -21,15 +21,15 @@ IF NOT EXISTS category
     /**
      * @var integer
      */
-    id int AUTO_INCREMENT,
+    id int AUTO_INCREMENT primary key,
     /**
      * @var string
      */
-    name varchar,
+    name varchar(255),
     /**
      * @var string
      */
-    status varchar,
+    status varchar(255),
     /**
      * @var integer
      */
@@ -39,57 +39,57 @@ IF NOT EXISTS category
      */
     usercreate int,
 
-    avatar varchar
+    avatar varchar(255)
 ) ENGINE=INNODB;
 
 CREATE TABLE
 IF NOT EXISTS project
 (
-    id int AUTO_INCREMENT,
-    name varchar,
-    contact_email varchar,
-    contact_person varchar,
-    target varchar,
-    video varchar,
-    avatar varchar,
-    content varchar,
+    id int AUTO_INCREMENT primary key,
+    name varchar(255),
+    contact_email varchar(255),
+    contact_person varchar(255),
+    target varchar(255),
+    video varchar(255),
+    avatar varchar(255),
+    content varchar(255),
     status int,
-    status_display varchar,
+    status_display varchar(255),
     contribute_start_time int,
     contribute_end_time int,
     datecreate int,
     usercreate int,
     category_id int,
-    description varchar,
-    raised varchar,
+    description varchar(255),
+    raised varchar(255),
     percent_approve int,
-    contribute_address varchar,
-    funding_receipt varchar,
+    contribute_address varchar(255),
+    funding_receipt varchar(255),
     balance int,
-    hash varchar,
+    hash varchar(255),
     percent_terminate int,
     percent_consensus int,
-    type varchar,
+    type varchar(255),
     highest_value int,
-    highest_address varchar,
+    highest_address varchar(255),
     winner_user_id int,
     min_value int,
     step_value int,
-    token_name varchar,
-    symbol varchar,
+    token_name varchar(255),
+    symbol varchar(255),
     total_supply int
 ) ENGINE=INNODB;
 
 CREATE TABLE
 IF NOT EXISTS project_contribute
 (
-    id int AUTO_INCREMENT,
+    id int AUTO_INCREMENT primary key,
     project_id int,
     user_id int,
-    project_address varchar,
-    contribute_address varchar,
+    project_address varchar(255),
+    contribute_address varchar(255),
     datecreate int,
-    hash varchar,
+    hash varchar(255),
     value int
 
 ) ENGINE=INNODB;
@@ -104,95 +104,95 @@ IF NOT EXISTS registry
     /**
      * @var string
      */
-    logo varchar,
-    favicon varchar,
+    logo varchar(255),
+    favicon varchar(255),
     /**
      * @var string
      */
-    slogan varchar,
+    slogan varchar(255),
     /**
      * @var string
      */
-    map varchar,
+    map varchar(255),
     /**
      * @var string
      */
-    link_facebook varchar,
+    link_facebook varchar(255),
     /**
      * @var string
      */
-    link_google varchar,
+    link_google varchar(255),
     /**
      * @var string
      */
-    link_twitter varchar,
+    link_twitter varchar(255),
 
     /**
      * @var string
      */
-    seo_title varchar,
+    seo_title varchar(255),
     /**
      * @var string
      */
-    seo_description varchar,
+    seo_description varchar(255),
     /**
      * @var string
      */
-    seo_keyword varchar,
+    seo_keyword varchar(255),
     /**
      * @var string
      */
-    hot_line varchar,
+    hot_line varchar(255),
     /**
      * @var string
      */
-    slide varchar,
-    address varchar,
-    sale_img varchar,
-    partner varchar,
-    script_head varchar,
-    script_body varchar,
-    team_support varchar
+    slide varchar(255),
+    address varchar(255),
+    sale_img varchar(255),
+    partner varchar(255),
+    script_head varchar(255),
+    script_body varchar(255),
+    team_support varchar(255)
 ) ENGINE=INNODB;
 
 
 CREATE TABLE
 IF NOT EXISTS user
 (
-    id int AUTO_INCREMENT,
-    username varchar,
-    password varchar,
-    status varchar,
-    email varchar,
+    id int AUTO_INCREMENT primary key,
+    username varchar(255),
+    password varchar(255),
+    status varchar(255),
+    email varchar(255),
     datecreate int,
-    role varchar,
-    fullname varchar,
-    avatar varchar,
-    eth_address varchar
+    role varchar(255),
+    fullname varchar(255),
+    avatar varchar(255),
+    eth_address varchar(255)
 ) ENGINE=INNODB;
 
 CREATE TABLE
 IF NOT EXISTS user_approve
 (
-    id int AUTO_INCREMENT,
+    id int AUTO_INCREMENT primary key,
     user_id int,
     project_id int,
     withdraw_id int,
-    hash varchar,
+    hash varchar(255),
     datecreate int
 ) ENGINE=INNODB;
 
 CREATE TABLE
 IF NOT EXISTS withdraw
 (
-    id int AUTO_INCREMENT,
+    id int AUTO_INCREMENT primary key,
     amount int,
     project_id int,
-    caption varchar,
+    caption varchar(255),
     datecreate int,
     usercreate int,
-    status varchar,
-    hash varchar,
-    vote_start_time int,
-    vote_end_time int
+    status varchar(255),
+    hash varchar(255),
+    vote_start_time bigint,
+    vote_end_time bigint
 ) ENGINE=INNODB;
