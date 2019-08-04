@@ -100,37 +100,44 @@
     {#</div>#}
     {#</section>#}
 
-    {#<section id="category" class="sec-our-causes ">
+    <section id="category" class="sec-our-causes ">
 
         <div class="container">
             <h3 class="title">Fundraising
                 <span>
-                Categories
+                    Categories
                 </span>
             </h3>
             <div class="row">
 
                 {% for item in list_running %}
-                    <div class="col-sm-4 box-item-cate">
-                        <div class="image-our-causes">
-                            <a href="{{ item is not empty ? item.getLink() : 'javascript:' }}"><img src="{{ item is not empty ? item.getAvatar() : '' }}" title="{{ item.name }}"></a>
-                        </div>
-
-                        <div class="content-img">
-                            <h3 class="title"><a href="{{ item is not empty ? item.getLink() : 'javascript:' }}">{{ item.name }}</a></h3>
-                            <span class="fa fa-flag title-text goal">TARGET : <em> {{ number_format(item.target, 2) }} ETH</em></span>
-                            <span class="title-text raised">RAISED : <em> {{ number_format(item.raised, 2) }} ETH</em></span>
-                            <p>{{ item.description }}</p>
-                            <a href="{{ item is not empty ? item.getLink() : 'javascript:' }}" class="background-our-causes bg-blue">Read More</a>
-                            <a href="{{ item is not empty ? item.getLink() : 'javascript:' }}" class="background-our-causes bg-donate pull-right">Donate</a>
-                        </div>
+                <div class="col-sm-4 box-item-cate">
+                    <div class="image-our-causes">
+                        <a href="{{ item is not empty ? item.getLink() : 'javascript:' }}"><img
+                                src="{{ item is not empty ? item.getAvatar() : '' }}" title="{{ item.name }}"></a>
                     </div>
+
+                    <div class="content-img">
+                        <h3 class="title"><a
+                                href="{{ item is not empty ? item.getLink() : 'javascript:' }}">{{ item.name }}</a></h3>
+                        <span class="fa fa-flag title-text goal">TARGET : <em> {{ number_format(item.target, 2) }}
+                                ETH</em></span>
+                        <span class="title-text raised">RAISED : <em> {{ number_format(item.raised, 2) }}
+                                ETH</em></span>
+                        <p>{{ item.description }}</p>
+                        <a href="{{ item is not empty ? item.getLink() : 'javascript:' }}"
+                            class="background-our-causes bg-blue">Read More</a>
+                        <a href="{{ item is not empty ? item.getLink() : 'javascript:' }}"
+                            class="background-our-causes bg-donate pull-right">Donate</a>
+                    </div>
+                </div>
                 {% endfor %}
 
-                #}{#<div class="col-sm-4 col-xs-6 box-item-cate">
+                <!-- <div class="col-sm-4 col-xs-6 box-item-cate">
                     <div class="box_cate class_0">
-                        <a   href="/poverty-reduction-c6">
-                            <img src="/client_resource/assets/img/cate/1.jpg" class="mb-0 image_category" alt=" Poverty reduction"></a>
+                        <a href="/poverty-reduction-c6">
+                            <img src="/client_resource/assets/img/cate/1.jpg" class="mb-0 image_category"
+                                alt=" Poverty reduction"></a>
                         <div class="inner_cate">
                             <a href="/poverty-reduction-c6" title=" Poverty reduction">
                                 <p> Eco-friendly products</p>
@@ -140,8 +147,9 @@
                 </div>
                 <div class="col-sm-4 col-xs-6 box-item-cate">
                     <div class="box_cate class_1">
-                        <a   href="/medical-health-c5">
-                            <img class="mb-0 image_category" src="/client_resource/assets/img/cate/2.jpg" alt=" Medical-Health"></a>
+                        <a href="/medical-health-c5">
+                            <img class="mb-0 image_category" src="/client_resource/assets/img/cate/2.jpg"
+                                alt=" Medical-Health"></a>
                         <div class="inner_cate">
                             <a href="/medical-health-c5" title=" Medical-Health">
                                 <p> Technology</p>
@@ -151,8 +159,9 @@
                 </div>
                 <div class="col-sm-4 col-xs-6 box-item-cate">
                     <div class="box_cate class_2">
-                        <a  href="/education-c4">
-                            <img class="mb-0 image_category" src="/client_resource/assets/img/cate/3.jpg" alt=" Education"></a>
+                        <a href="/education-c4">
+                            <img class="mb-0 image_category" src="/client_resource/assets/img/cate/3.jpg"
+                                alt=" Education"></a>
                         <div class="inner_cate">
                             <a href="/education-c4" title=" Education">
                                 <p> Crafts</p>
@@ -162,8 +171,9 @@
                 </div>
                 <div class="col-sm-4 col-xs-6 box-item-cate">
                     <div class="box_cate class_3">
-                        <a   href="/conserve-c3">
-                            <img class="mb-0 image_category" src="/client_resource/assets/img/cate/4.jpg" alt=" Conserve"></a>
+                        <a href="/conserve-c3">
+                            <img class="mb-0 image_category" src="/client_resource/assets/img/cate/4.jpg"
+                                alt=" Conserve"></a>
                         <div class="inner_cate">
                             <a href="/conserve-c3" title=" Conserve">
                                 <p> Art</p>
@@ -174,7 +184,8 @@
                 <div class="col-sm-4 col-xs-6 box-item-cate">
                     <div class="box_cate class_4">
                         <a href="/environment-c2">
-                            <img class="mb-0 image_category" src="/client_resource/assets/img/cate/7.jpg" alt=" Environment"></a>
+                            <img class="mb-0 image_category" src="/client_resource/assets/img/cate/7.jpg"
+                                alt=" Environment"></a>
                         <div class="inner_cate">
                             <a href="/environment-c2" title=" Environment">
                                 <p> Game</p>
@@ -185,19 +196,20 @@
                 <div class="col-sm-4 col-xs-6 box-item-cate">
                     <div class="box_cate class_5">
                         <a href="/rescue--aid-c1">
-                            <img class="mb-0 image_category" src="/client_resource/assets/img/cate/6.jpg" alt="Rescue &amp; Aid"></a>
+                            <img class="mb-0 image_category" src="/client_resource/assets/img/cate/6.jpg"
+                                alt="Rescue &amp; Aid"></a>
                         <div class="inner_cate">
                             <a href="/rescue--aid-c1" title="Rescue &amp; Aid">
                                 <p>Others</p>
                             </a>
                         </div>
                     </div>
-                </div>#}{#
+                </div> -->
                 <div class="clearfix"></div>
             </div>
 
         </div>
-    </section>#}
+    </section>
 
     <section class="sec-our-causes bg_ef">
 

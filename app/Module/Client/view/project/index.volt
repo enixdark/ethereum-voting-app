@@ -94,11 +94,9 @@
                             </div>
                         </div>
 
-                        {#{% if object.contribute_end_time > 0 or time() < object.contribute_end_time %}#}
                         <div class="button_back">
                             <button type="submit" class="btn bg-donate btn-detail" id="donate-fund">Donate</button>
                         </div>
-                        {#{% endif %}#}
 
                         {% if user_info.id == object.usercreate %}
                         <a style="margin-top: 10px" href="/project/withdraw?id={{ object.id }}"

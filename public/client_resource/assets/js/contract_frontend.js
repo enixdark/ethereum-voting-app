@@ -9,7 +9,7 @@ App = {
         } else {
 
             // If no injected web3 instance is detected, fall back to Ganache
-            App.web3Provider = new Web3.providers.HttpProvider('http://103.56.156.70:8545');
+            App.web3Provider = new Web3.providers.HttpProvider('http://127.0.0.1:8545');
         }
         web3 = new Web3(App.web3Provider);
 
@@ -25,7 +25,6 @@ App = {
         // });
 
         return App.initContract();
-
 
     },
 
@@ -80,7 +79,6 @@ App = {
 
     bindEvents: function () {
 
-
         $(document).on('click', '#donate-fund', App.donateFund);
 
         $(document).on('click', '#btn_accept', App.accept_withdraw);
@@ -122,6 +120,7 @@ App = {
         let project_id = project_info.attr('data-id');
 
         web3.eth.getAccounts(function (error, accounts) {
+            debugger
             if (error) {
                 console.log(error);
             }
@@ -131,56 +130,101 @@ App = {
             web3.eth.sendTransaction({
                 to: _toAddress,
                 from: send_account,
-                value: web3.toWei(_value, "ether")
+                value: web3.toWei(_value, "ether"),
+                gas: 300000
             }, function (err, hash) {
+                debugger
+                if (err) {
+                    console.log(err);
+                }
                 if (hash === undefined || !hash.length) {
                     return false
                 }
 
-                let fundContract = App.contracts.DCFunding.at($('#contribute_address').val());
-
-                async function get_balance() {
-                    let raised = await fundContract.totalRaised().then(function (raised) {
-                        raised = web3.fromWei(raised, 'ether');
-                        raised = web3.toDecimal(raised);
-                        return raised;
-                    });
-
-                    let balance = await fundContract.currentBalance().then(function (balance) {
-                        balance = web3.fromWei(balance, 'ether');
-                        balance = web3.toDecimal(balance);
-                        return balance;
-                    });
-
-                    $.ajax({
-                        method: "POST",
-                        url: "/api/create_project_contribute",
-                        data: {
-                            project_id: project_id,
-                            value: _value,
-                            hash: hash,
-                            raised: raised,
-                            balance: balance
-                        }
-                    }).done(function (msg) {
-                        $.toast({
-                            heading: 'Success',
-                            text: "Success!",
-                            icon: 'info',
-                            loader: true,
-                            position: 'top-right',
+                App.contracts.DCFunding.at($('#contribute_address').val()).then(function (instance) {
+                    debugger
+                    instance.totalRaised().then(function (raised) {
+                        debugger
+                        let _raised = web3.fromWei(raised, 'ether');
+                        _raised = web3.toDecimal(_raised);
+                        instance.currentBalance().then(function (balance) {
+                            let _balance = web3.fromWei(balance, 'ether');
+                            _balance = web3.toDecimal(_balance);
+                            $.ajax({
+                                method: "POST",
+                                url: "/api/create_project_contribute",
+                                data: {
+                                    project_id: project_id,
+                                    value: _value,
+                                    hash: hash,
+                                    raised: _raised,
+                                    balance: _balance
+                                }
+                            }).done(function (msg) {
+                                $.toast({
+                                    heading: 'Success',
+                                    text: "Success!",
+                                    icon: 'info',
+                                    loader: true,
+                                    position: 'top-right',
+                                });
+                            });
+                            project_info.attr({
+                                'data-raised': _raised,
+                                'data-balance': _balance
+                            });
                         });
-                    });
-                    project_info.attr({
-                        'data-raised': raised,
-                        'data-balance': balance
-                    });
-                }
 
-                get_balance();
+                    }).catch(function (err) {
+                        console.log(err);
+                    });;
+                }).catch(function (err) {
+                    console.log(err);
+                }).catch(function (err) {
+                    console.log(err);
+                });;;
 
-            });
+                // async function get_balance() {
+                //     let raised = await fundContract.totalRaised().then(function (raised) {
+                //         raised = web3.fromWei(raised, 'ether');
+                //         raised = web3.toDecimal(raised);
+                //         return raised;
+                //     });
 
+                //     let balance = await fundContract.currentBalance().then(function (balance) {
+                //         balance = web3.fromWei(balance, 'ether');
+                //         balance = web3.toDecimal(balance);
+                //         return balance;
+                //     });
+
+                //     $.ajax({
+                //         method: "POST",
+                //         url: "/api/create_project_contribute",
+                //         data: {
+                //             project_id: project_id,
+                //             value: _value,
+                //             hash: hash,
+                //             raised: raised,
+                //             balance: balance
+                //         }
+                //     }).done(function (msg) {
+                //         $.toast({
+                //             heading: 'Success',
+                //             text: "Success!",
+                //             icon: 'info',
+                //             loader: true,
+                //             position: 'top-right',
+                //         });
+                //     });
+                //     project_info.attr({
+                //         'data-raised': raised,
+                //         'data-balance': balance
+                //     });
+                // }
+
+                // get_balance();
+
+            })
             /*	fundContract = App.contracts.DCFunding.at($('#contribute_address').val());
                 var _state = fundContract.state().then(function(state) {
                     console.log(state);
@@ -377,61 +421,127 @@ App = {
 
         let start_time = getTimestamp(vote_start_time);
         let end_time = getTimestamp(vote_end_time);
+        web3.eth.getAccounts(async (error, accounts) => {
+            if (error) {
+                console.log(error);
+                return;
+            }
+            web3.eth.defaultAccount = accounts[0];
+            let fundContract = App.contracts.DCFunding.at($('#project_address').val()).then(function (instance) {
+                debugger
+                let project_id = $('#project_id').val();
+                let caption = $('#caption').val();
 
-        let fundContract = App.contracts.DCFunding.at($('#project_address').val());
+                let mul = Math.pow(10, 18);
+                let request_amount = amount * mul;
+                instance.requestDisbursement(request_amount).then(function (res1) {
+                    debugger
 
-        async function request_withdraw() {
+                    let result_request_hash = res1.tx;
+                    instance.setDisbursementEndTime(end_time).then(function (res2) {
+                        let result_time_hash = res2.tx;
+                        debugger
+                        $.ajax({
+                            method: "POST",
+                            url: "/api/create_withdraw",
+                            data: {
+                                project_id: project_id,
+                                amount: amount,
+                                vote_start_time: start_time,
+                                vote_end_time: end_time,
+                                hash: result_request_hash,
+                                caption: caption
+                            }
+                        }).done(function (data) {
+                            debugger
+                            if (data.status === 2) {
+                                return $.toast({
+                                    heading: 'Success',
+                                    text: "Success!",
+                                    icon: 'info',
+                                    loader: true,
+                                    position: 'top-right',
+                                });
+                            }
 
-
-            let project_id = $('#project_id').val();
-            let caption = $('#caption').val();
-
-            let mul = Math.pow(10, 18);
-            let request_amount = amount * mul;
-
-            let result_request_hash = await fundContract.requestDisbursement(request_amount).then(function (res) {
-                return res.tx;
-            });
-
-            let result_time_hash = await fundContract.setDisbursementEndTime(end_time).then(function (res) {
-                return res.tx;
-            });
-
-            $.ajax({
-                method: "POST",
-                url: "/api/create_withdraw",
-                data: {
-                    project_id: project_id,
-                    amount: amount,
-                    vote_start_time: start_time,
-                    vote_end_time: end_time,
-                    hash: result_request_hash,
-                    caption: caption
-                }
-            }).done(function (data) {
-                if (data.status === 2) {
-                    return $.toast({
-                        heading: 'Success',
-                        text: "Success!",
-                        icon: 'info',
-                        loader: true,
-                        position: 'top-right',
+                            return $.toast({
+                                heading: 'Warning',
+                                text: data.message,
+                                icon: 'warning',
+                                loader: true,
+                                position: 'top-right',
+                            });
+                        }).catch(function (err) {
+                            debugger
+                            console.log(err);
+                        });
+                    }).catch(function (err) {
+                        console.log(err);
                     });
-                }
-
-                return $.toast({
-                    heading: 'Warning',
-                    text: data.message,
-                    icon: 'warning',
-                    loader: true,
-                    position: 'top-right',
+                }).catch(function (err) {
+                    console.log(err);
                 });
-
             });
 
-        }
+            // async function request_withdraw() {
 
-        request_withdraw();
+            //     debugger
+            //     let project_id = $('#project_id').val();
+            //     let caption = $('#caption').val();
+
+            //     let mul = Math.pow(10, 18);
+            //     let request_amount = amount * mul;
+
+            //     let result_request_hash = await fundContract.requestDisbursement(request_amount).then(function (res) {
+            //         return res.tx;
+            //     }).catch(function (err) {
+            //         console.log(err);
+            //         // There was an error! Handle it.
+            //     });
+
+            //     let result_time_hash = await fundContract.setDisbursementEndTime(end_time).then(function (res) {
+            //         return res.tx;
+            //     }).catch(function (err) {
+            //         console.log(err);
+            //         // There was an error! Handle it.
+            //     });
+
+            //     $.ajax({
+            //         method: "POST",
+            //         url: "/api/create_withdraw",
+            //         data: {
+            //             project_id: project_id,
+            //             amount: amount,
+            //             vote_start_time: start_time,
+            //             vote_end_time: end_time,
+            //             hash: result_request_hash,
+            //             caption: caption
+            //         }
+            //     }).done(function (data) {
+            //         if (data.status === 2) {
+            //             return $.toast({
+            //                 heading: 'Success',
+            //                 text: "Success!",
+            //                 icon: 'info',
+            //                 loader: true,
+            //                 position: 'top-right',
+            //             });
+            //         }
+
+            //         return $.toast({
+            //             heading: 'Warning',
+            //             text: data.message,
+            //             icon: 'warning',
+            //             loader: true,
+            //             position: 'top-right',
+            //         });
+
+            //     });
+
+            // }
+
+            // await request_withdraw();
+        });
     },
 
     get_current_warrior: function () {

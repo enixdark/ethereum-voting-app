@@ -9,7 +9,7 @@ App = {
         } else {
 
             // If no injected web3 instance is detected, fall back to Ganache
-            App.web3Provider = new Web3.providers.HttpProvider('http://103.56.156.70:8545');
+            App.web3Provider = new Web3.providers.HttpProvider('http://127.0.0.1:8545');
         }
         web3 = new Web3(App.web3Provider);
 
@@ -76,7 +76,7 @@ App = {
                 }
                 web3.eth.defaultAccount = accounts[0];
 
-                App.contracts.DCFunding.new({
+                App.contracts.DCFunding.new(_fundRecipient, _targetFunding, _campaignUrl, _fundingStartTime, _fundingEndTime, {
                     from: web3.eth.defaultAccount,
                     gas: 5000000
                 }).then(function (instance) {
@@ -236,7 +236,7 @@ App = {
                     return;
                 }
                 web3.eth.defaultAccount = accounts[0];
-                App.contracts.DCBidding.new({
+                App.contracts.DCBidding.new(_fundRecipient, _targetFunding, _campaignUrl, _fundingStartTime, _fundingEndTime, {
                     from: web3.eth.defaultAccount,
                     gas: 5000000
                 }).then(function (instance) {
