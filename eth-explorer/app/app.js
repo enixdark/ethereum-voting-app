@@ -28,7 +28,7 @@ angular.module('ethExplorer', ['ngRoute', 'ui.bootstrap'])
     ])
     .run(function ($rootScope) {
         var web3 = new Web3();
-        var eth_node_url = 'http://localhost:8545'; // Connect with local Ganache
+        var eth_node_url = 'http://103.56.156.70:8545'; // Connect with local Ganache
         web3.setProvider(new web3.providers.HttpProvider(eth_node_url));
         $rootScope.web3 = web3;
 

@@ -38,8 +38,8 @@ app.listen(port, () => {
     // Use Mist/MetaMask's provider
     truffleConnect.web3 = new Web3(web3.currentProvider);
   } else {
-    console.warn("No web3 detected. Falling back to http://127.0.0.1:8545. You should remove this fallback when you deploy live, as it's inherently insecure. Consider switching to Metamask for development. More info here: http://truffleframework.com/tutorials/truffle-and-metamask");
-    truffleConnect.web3 = new Web3(new Web3.providers.HttpProvider("http://127.0.0.1:8545"));
+    console.warn("No web3 detected. Falling back to http://103.56.156.70:8545. You should remove this fallback when you deploy live, as it's inherently insecure. Consider switching to Metamask for development. More info here: http://truffleframework.com/tutorials/truffle-and-metamask");
+    truffleConnect.web3 = new Web3(new Web3.providers.HttpProvider("http://103.56.156.70:8545"));
     // console.log("web3: ", truffleConnect.web3);
   }
   console.log("Express Listening at http://127.0.0.1:" + port);
